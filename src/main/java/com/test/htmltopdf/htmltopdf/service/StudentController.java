@@ -2,9 +2,6 @@ package com.test.htmltopdf.htmltopdf.service;
 
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,20 +16,17 @@ import java.nio.file.Paths;
 
 @Controller
 public class StudentController {
+    @Autowired
     private StudentService studentService;
+    @Autowired
     private PdfService pdfService;
 
-    @Autowired
-    public StudentController(StudentService studentService, PdfService pdfService) {
-        this.studentService = studentService;
-        this.pdfService = pdfService;
-    }
+
 
     @GetMapping("/students")
     public ModelAndView studentsView(ModelAndView modelAndView) {
         modelAndView.addObject("students", studentService.getStudents());
         modelAndView.setViewName("students");
-//        modelAndView.setViewName("studentsT");
         return modelAndView;
     }
 
